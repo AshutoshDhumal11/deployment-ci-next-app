@@ -11,13 +11,15 @@ jobs:
 
     steps:
       - name: SSH and deploy
-      - run: | 
-          echo ${{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
-          chmod 600 ssh_key
-          ssh -i ~/ssh_key ubuntu@13.48.135.227
-          cd deployment-ci-next-app && git pull
-          pnpm install
-          pnpm run build
-          pm2 restart http-server
-          pm2 restart ws-server
-          pm2 restart web
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
+          chmod 600 ~/ssh_key
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@13.48.135.227 "
+            cd deployment-ci-next-app &&
+            git pull &&
+            pnpm install --frozen-lockfile &&
+            pnpm run build &&
+            pm2 restart http-server &&
+            pm2 restart ws-server &&
+            pm2 restart web
+          "
