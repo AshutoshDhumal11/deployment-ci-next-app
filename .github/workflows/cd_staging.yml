@@ -18,7 +18,7 @@ jobs:
           chmod 700 /home/runner/.ssh/known_hosts
           chmod 600 ~/ssh_key
           ssh -i ~/ssh_key ubuntu@13.48.135.227 -t "
-            export PATH=\$HOME/.local/share/pnpm:\$PATH && 
+            source export PATH=/home/ubuntu/.nvm/versions/node/v22.19.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin && 
             cd deployment-ci-next-app && git pull origin main && 
             pnpm install && 
             pnpm run build && 
