@@ -18,6 +18,7 @@ jobs:
           chmod 700 /home/runner/.ssh/known_hosts
           chmod 600 ~/ssh_key
           ssh -i ~/ssh_key ubuntu@13.48.135.227 -t "
+            source ~/.bashrc &&
             cd deployment-ci-next-app && git pull origin main &&
             pnpm install &&
             pnpm run build &&
