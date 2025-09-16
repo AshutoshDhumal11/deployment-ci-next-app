@@ -15,6 +15,7 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
           chmod 600 ~/ssh_key
           ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@13.48.135.227 "
+            source ~/.bashrc &&
             cd deployment-ci-next-app &&
             git pull &&
             pnpm install --frozen-lockfile &&
