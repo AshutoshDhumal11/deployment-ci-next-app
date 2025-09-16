@@ -11,6 +11,7 @@ jobs:
       - name: SSH and deploy
         run: | 
           echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+          mkdir .ssh
           echo "${{ secrets.KNOWN_HOSTS }}" &> ~/.ssh/known_hosts
           chmod 600 ~/ssh_key
           ssh -i ~/ssh_key ubuntu@13.48.135.227
